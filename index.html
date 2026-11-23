@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ackerman Tea — небольшая чайная лавка. Шесть сортов чая для утра, тихого вечера и паузы между делами.">
+  <title>Ackerman Tea — чайная лавка</title>
+  <link rel="icon" href="Assets/favicon.ico" sizes="16x16 32x32 48x48 64x64">
+  <link rel="preload" href="Assets/ofont.ru_Jun.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="Assets/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="catalog.js"></script><script defer src="shop.js"></script>
+</head>
+<body>
+<header class="header inset">
+  <a class="brand" href="#home">Ackerman</a>
+  <nav aria-label="Главная навигация"><a href="#catalog">Каталог</a><a href="#about">О лавке</a><a href="#delivery">Доставка</a><button type="button" data-open-cart>Корзина<span class="cart-count" data-cart-count hidden>0</span></button></nav>
+  <a class="button header-order" href="#catalog">Сделать заказ</a>
+  <div class="mobile-tools">
+    <button class="mobile-icon bag" type="button" data-open-cart aria-label="Открыть мини-корзину" aria-haspopup="dialog"><img src="Assets/bag.svg" alt=""><span class="cart-count" data-cart-count hidden>0</span></button>
+    <button class="mobile-icon" id="open-menu" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false"><img src="Assets/menu.svg" alt=""></button>
+  </div>
+</header>
+<dialog id="mobile-menu" class="mobile-menu" aria-label="Меню">
+  <div class="menu-head"><a class="brand" href="#home">Ackerman</a><button class="mobile-icon" id="close-menu" aria-label="Закрыть меню"><img src="Assets/close.svg" alt=""></button></div>
+  <nav aria-label="Разделы сайта"><a href="#catalog">Каталог<img src="Assets/arrow.svg" alt=""></a><a href="#about">О лавке<img src="Assets/arrow.svg" alt=""></a><a href="#brewing">Как заваривать<img src="Assets/arrow.svg" alt=""></a><a href="#delivery">Доставка и оплата<img src="Assets/arrow.svg" alt=""></a></nav>
+</dialog>
+<div class="site">
+<main>
+<div id="home" data-page>
+  <section class="hero">
+    <div class="hero-copy"><span class="hero-eyebrow">Чайная лавка</span><h1>Ackerman Tea</h1><p>Небольшая чайная лавка с требовательным подходом к выбору. Шесть сортов для утра, тихого вечера и паузы между делами.</p><a class="button hero-cta" href="#catalog"><span>ВЫБРАТЬ ЧАЙ</span><img class="arrow" src="Assets/arrow.svg" alt=""></a></div>
+    <div class="photo hero-photo"><img style="width:106.68875%;height:114.88600%;left:-2.87834%;top:-4.84599%" fetchpriority="high" src="Assets/tea-collection.png" alt="Чай, сушёные цветы и травы в стеклянных чашах"></div>
+  </section>
+  <section id="about" class="about inset home-section">
+    <div class="about-mask"><div class="photo jasmine"><img style="width:100.00000%;height:138.07463%;left:-0.00000%;top:-19.03731%" src="Assets/jasmine-tea.jpg" alt="Зелёный чай в белой чашке"></div><i></i><i></i></div>
+    <h2>О лавке</h2>
+    <div class="about-intro"><h3>Небольшая коллекция. Внимательный выбор.</h3><p>В нашей лавке шесть сортов чая — от крепкого чёрного до мягкого травяного сбора. Мы выбираем их за выразительный вкус и собираем коллекцию так, чтобы каждый мог найти свой: для неспешного утра, перерыва в работе или тихого вечера.</p></div>
+    <div class="about-copy">
+      <div><h3>Шесть разных вкусов</h3><p>У каждого сорта свой характер. В описаниях — понятные ориентиры, которые помогут определиться.</p></div>
+      <div><h3>Всё о чае до покупки</h3><p>Тип чая, вкусовые ноты и вес указаны в каждой карточке.</p></div>
+      <div><h3>Заварить просто</h3><p>Для каждого сорта подготовили рекомендации по температуре воды и времени заваривания.</p></div>
+    </div>
+  </section>
+  <section id="catalog" class="catalog home-section">
+    <div class="section-head inset"><h2>Каталог</h2><div class="filters">
+      <div class="filter"><button class="button filter-toggle" aria-expanded="false" aria-controls="type-menu">ТИП ЧАЯ<img src="Assets/type-sort.svg" alt=""></button><div id="type-menu" class="filter-menu" hidden></div></div>
+      <div class="filter"><button class="button filter-toggle" aria-expanded="false" aria-controls="price-menu">ПО ЦЕНЕ<img src="Assets/price-sort.svg" alt=""></button><div id="price-menu" class="filter-menu" hidden></div></div>
+    </div></div>
+    <div class="card-grid" id="catalog-grid"></div>
+  </section>
+  <section id="brewing" class="how inset home-section"><h2>Как заваривать</h2><p class="how-intro">Начните с чёрного чая «Утренний порядок». Вам понадобятся любимая чашка, горячая вода и несколько свободных минут.</p><div class="how-steps"><article><span class="step-number">01</span><h3>Отмерьте чай</h3><p>Возьмите около <b>2</b> г чая на <b>200</b> мл воды. Прогрейте чашку или заварник горячей водой и слейте её.</p></article>
+<article><span class="step-number">02</span><h3>Залейте водой</h3><p>Используйте свежую воду температурой <b>90–95 °C</b>, чтобы раскрыть вкус и аромат чайного листа.</p></article>
+<article><span class="step-number">03</span><h3>Дайте настояться</h3><p>Подождите <b>3–5</b> минут, затем отделите настой от листьев. Начните с трёх минут и подберите крепость по своему вкусу.</p></article></div><p class="how-note">Для других сортов температура и время отличаются. Рекомендации вы найдёте в карточке каждого чая.</p></section>
+  <section id="delivery" class="home-delivery inset home-section">
+    <div><h2>Доставка и оплата</h2><div class="delivery-copy">
+  <div><h3>Доставим удобным способом</h3><p>Курьером или в пункт выдачи по России. Соберём и отправим заказ за 1–2 рабочих дня. Стоимость и срок доставки рассчитаем при оформлении.</p></div>
+  <div><h3>Оплата онлайн</h3><p>Банковской картой или через СБП. После оплаты отправим подтверждение заказа и электронный чек на вашу почту.</p></div>
+</div><a class="button delivery-cta" href="#catalog"><span>СДЕЛАТЬ ЗАКАЗ</span><img class="arrow" src="Assets/arrow.svg" alt=""></a></div>
+    <div class="photo delivery-photo"><img src="Assets/Коробка в доставке.png" alt="Коробка для доставки чая"></div>
+  </section>
+</div>
+<div id="product" data-page hidden>
+  <a class="mobile-back inset" href="#catalog"><img src="Assets/back.svg" alt="">В каталог</a>
+  <nav class="crumb inset" aria-label="Хлебные крошки"><a href="#home">Главная</a><span>/</span><a href="#catalog">Каталог</a><span>/</span><span data-product-title></span></nav>
+  <section class="product-top inset">
+    <img class="product-image" id="product-image" alt="">
+    <div class="product-info"><small id="product-type"></small><h1 id="product-name"></h1><p id="product-flavour"></p><p id="product-intro"></p><div class="weight">50 г</div>
+    <div class="product-price"><b id="product-price"></b><small>за упаковку 50 г</small></div>
+    <div class="product-actions detail-slot" data-purchase="detail"><button class="button" id="buy-product" type="button"><span class="add-label"><span class="desktop-only">Добавить в корзину</span><span class="mobile-only">В корзину</span></span><span class="in-cart-label">В корзине</span></button></div><p class="ship-note">Отправим за 1–2 рабочих дня.<br> Доставим курьером или в пункт выдачи.</p></div>
+  </section>
+  <section class="character inset"><div><h2>Характер чая</h2><p id="character-desc"></p></div><dl id="tea-characteristics"></dl></section>
+  <section class="product-brew inset" id="product-brew"><h2>Как заваривать</h2><p id="brew-note"></p><div class="brew-steps" id="brew-steps"></div></section>
+  <section class="related inset"><div class="section-head"><h2>Попробуйте также</h2><a class="all-catalog" href="#catalog">ВЕСЬ КАТАЛОГ<img src="Assets/arrow.svg" alt=""></a></div><div class="card-grid" id="related-grid"></div></section>
+  <section class="product-delivery inset"><h2>Доставка и оплата</h2><div class="details-columns"><div><h3>Доставим удобным способом</h3><p>Курьером или в пункт выдачи по России. Соберём и отправим заказ за 1–2 рабочих дня. Стоимость и срок доставки рассчитаем при оформлении.</p></div><div><h3>Оплата онлайн</h3><p>Банковской картой или через СБП. После оплаты отправим подтверждение заказа и электронный чек на вашу почту.</p></div></div></section>
+</div>
+<div id="cart" data-page hidden>
+  <a class="mobile-back inset" href="#catalog"><img src="Assets/back.svg" alt="">В каталог</a>
+  <nav class="crumb inset" aria-label="Хлебные крошки"><a href="#home">Главная</a><span>/</span><span>Корзина</span></nav>
+  <section class="cart-area inset"><h1>Корзина</h1><div id="cart-content"></div></section>
+</div>
+<div id="checkout" data-page hidden>
+  <a class="mobile-back inset" href="#cart"><img src="Assets/back.svg" alt="">В корзину</a>
+  <nav class="crumb inset" aria-label="Хлебные крошки"><a href="#home">Главная</a><span>/</span><a href="#cart">Корзина</a><span>/</span><span>Оформление заказа</span></nav>
+  <section class="checkout-area inset"><h1>Оформление<span class="order-last-word"> заказа</span></h1>
+    <div id="checkout-empty" hidden></div>
+    <div class="checkout-grid" id="checkout-grid"><form id="checkout-form">
+      <fieldset><legend>Контактные данные</legend>
+      <label class="field"><span>Имя получателя</span><input name="name" type="text" placeholder="ФИО" autocomplete="name" required maxlength="100"></label>
+      <label class="field"><span>Телефон</span><input name="phone" type="tel" placeholder="+7 000 000-00-00" autocomplete="tel" required maxlength="24"></label>
+      <label class="field"><span>Электронная почта</span><input name="email" type="email" placeholder="name@example.com" autocomplete="email" required maxlength="254"></label></fieldset>
+      <fieldset><legend>Доставка</legend>
+      <label class="choice"><input type="radio" name="delivery" value="courier" checked><span><b>Курьерская доставка</b><small>Доставим до двери за 1–3 дня.</small></span></label>
+      <label class="choice"><input type="radio" name="delivery" value="pickup"><span><b>Пункт выдачи</b><small>Выберите удобный пункт выдачи.</small></span></label>
+      <label class="field"><span>Город</span><input name="city" type="text" placeholder="Санкт-Петербург" autocomplete="address-level2" required maxlength="120"></label>
+      <label class="field"><span id="address-label">Адрес</span><input name="address" autocomplete="street-address" placeholder="Улица, дом, квартира" required maxlength="250"></label>
+      </fieldset>
+      <fieldset><legend>Оплата</legend><label class="choice"><input type="radio" name="payment" value="card" checked><span><b>Картой онлайн</b><small>После подтверждения откроем безопасную страницу оплаты.</small></span></label><label class="choice"><input type="radio" name="payment" value="sbp"><span><b>Через СБП</b><small>Оплата в приложении банка.</small></span></label></fieldset>
+    </form><aside class="order-summary" id="checkout-summary" aria-label="Ваш заказ"></aside></div>
+  </section>
+</div>
+</main>
+</div>
+<footer class="footer"><div class="footer-inner inset">
+  <div class="footer-brand"><a class="footer-logo" href="#home">Ackerman Tea</a><p>Небольшая чайная лавка с требовательным подходом к выбору.</p></div>
+  <div class="footer-col"><h4>Навигация</h4><a href="#catalog">Каталог</a><a href="#about">О лавке</a><a href="#brewing">Как заваривать</a><a href="#delivery">Доставка и оплата</a></div>
+  <div class="footer-col"><h4>Связаться с нами</h4><span>Написать на почту</span></div>
+  <div class="legal"><span>© 2026 ACKERMAN TEA</span><div><span>Политика конфиденциальности</span><span>Публичная оферта</span></div></div>
+</div></footer>
+<dialog class="mini-cart" id="drawer" aria-labelledby="drawer-heading"><div class="drawer-head"><h2 id="drawer-heading">Корзина</h2><button type="button" class="icon-button" aria-label="Закрыть корзину" data-close-cart><img src="Assets/close.svg" alt=""></button></div><div id="drawer-content"></div></dialog>
+<dialog class="receipt" id="receipt" aria-labelledby="receipt-title"><h2 id="receipt-title">Демонстрационный заказ</h2><p id="receipt-detail"></p><p>Оплата и отправка заказа в магазин не подключены.</p><a class="button " href="#catalog"><span>В КАТАЛОГ</span><img class="arrow" src="Assets/arrow.svg" alt=""></a></dialog>
+<noscript>Включите JavaScript, чтобы открыть каталог и корзину.</noscript>
+</body></html>
