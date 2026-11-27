@@ -53,13 +53,16 @@ function actionLink(text, href, classes = "", showArrow = true) {
 function productUrl(tea) { return "#product/" + tea.id; }
 
 function productCard(tea, scope) {
+  const addIcon = scope === "catalog"
+    ? '<img src="Assets/plus.svg" width="22" height="22" alt="">'
+    : arrow();
   return `<article class="tea-card">
     <img class="card-photo" src="Assets/${tea.image}" width="339" height="339" alt="Упаковка чая «${tea.title}»" loading="lazy">
     <h3><a class="card-link" href="${productUrl(tea)}">${tea.title}</a></h3>
     <small class="card-weight">${tea.weight}</small>
     <p class="flavour">${tea.flavour}</p>
     <div class="card-bottom"><strong>${money(tea.price)}</strong>
-      <div class="purchase-slot" data-purchase="${scope}" data-tea="${tea.id}"><button class="button" type="button" data-add="${tea.id}" aria-label="Добавить «${tea.title}» в корзину"><span>В КОРЗИНУ</span>${arrow()}</button></div>
+      <div class="purchase-slot" data-purchase="${scope}" data-tea="${tea.id}"><button class="button" type="button" data-add="${tea.id}" aria-label="Добавить «${tea.title}» в корзину"><span>В КОРЗИНУ</span>${addIcon}</button></div>
     </div></article>`;
 }
 
