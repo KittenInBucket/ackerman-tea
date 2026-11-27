@@ -17,6 +17,7 @@ let selectedType = "all";
 let sortOrder = "default";
 let currentView = "home";
 let currentRoute = null;
+let sectionObserver = null;
 
 function readCart() {
   try {
@@ -53,16 +54,13 @@ function actionLink(text, href, classes = "", showArrow = true) {
 function productUrl(tea) { return "#product/" + tea.id; }
 
 function productCard(tea, scope) {
-  const addIcon = scope === "catalog"
-    ? '<img src="Assets/plus.svg" width="22" height="22" alt="">'
-    : arrow();
   return `<article class="tea-card">
     <img class="card-photo" src="Assets/${tea.image}" width="339" height="339" alt="Упаковка чая «${tea.title}»" loading="lazy">
     <h3><a class="card-link" href="${productUrl(tea)}">${tea.title}</a></h3>
     <small class="card-weight">${tea.weight}</small>
     <p class="flavour">${tea.flavour}</p>
     <div class="card-bottom"><strong>${money(tea.price)}</strong>
-      <div class="purchase-slot" data-purchase="${scope}" data-tea="${tea.id}"><button class="button" type="button" data-add="${tea.id}" aria-label="Добавить «${tea.title}» в корзину"><span>В КОРЗИНУ</span>${addIcon}</button></div>
+      <div class="purchase-slot" data-purchase="${scope}" data-tea="${tea.id}"><button class="button" type="button" data-add="${tea.id}" aria-label="Добавить «${tea.title}» в корзину"><span>В КОРЗИНУ</span><img src="Assets/plus.svg" width="22" height="22" alt=""></button></div>
     </div></article>`;
 }
 
@@ -304,8 +302,17 @@ function handleRoute() {
   updateOrderLink();
   const titles = { cart: "Корзина", checkout: "Оформление заказа", home: "Чайная лавка" };
   document.title = (product ? product.title : titles[view]) + " — Ackerman Tea";
-  if (section) section.scrollIntoView({ behavior: smooth ? "smooth" : "instant" });
-  else window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "instant" });
+  if (section) {
+    section.scrollIntoView({ behavior: smooth ? "smooth" : "instant" });
+    if (sectionObserver && section.classList.contains("is-visible")) {
+      section.classList.remove("is-visible");
+      // Commit the hidden state before the observer starts the next transition.
+      void section.offsetWidth;
+      sectionObserver.observe(section);
+    }
+  } else {
+    window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "instant" });
+  }
 }
 
 function initMotion() {
@@ -314,14 +321,14 @@ function initMotion() {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+  sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("is-visible");
-    observer.unobserve(entry.target);
+    sectionObserver.unobserve(entry.target);
   }), { threshold: 0 });
   document.querySelectorAll("#about, #catalog, #brewing, #delivery").forEach(section => {
     section.classList.add("reveal");
-    observer.observe(section);
+    sectionObserver.observe(section);
   });
 }
 
